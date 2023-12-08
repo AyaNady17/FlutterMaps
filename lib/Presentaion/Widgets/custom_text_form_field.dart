@@ -24,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
 
 Widget buildTextFormField() {
   return TextFormField(
+    maxLength: 11,
     keyboardType: TextInputType.phone,
     autofocus: true,
     style: StylesManager.textStyle16

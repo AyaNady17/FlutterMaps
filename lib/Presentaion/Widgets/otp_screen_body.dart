@@ -24,7 +24,7 @@ class OTPScreenBody extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 100),
-          PinCode(),
+          const PinCode(),
           const SizedBox(height: 60),
           const CustomNextButton(
             title: 'Verify',
