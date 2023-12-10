@@ -3,16 +3,15 @@ import 'package:flutter_maps/Constansts/strings.dart';
 import 'package:flutter_maps/Constansts/text_styles.dart';
 
 class CustomNextButton extends StatelessWidget {
-  const CustomNextButton({super.key, required this.title});
+  const CustomNextButton({super.key, required this.title, this.onPressed});
   final String title;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomRight,
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, otpScreen);
-        },
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),

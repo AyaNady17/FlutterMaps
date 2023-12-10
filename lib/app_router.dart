@@ -1,15 +1,32 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_maps/Bussines%20Logic/cubit/phoneAuthCubit/phone_auth_cubit.dart';
 import 'package:flutter_maps/Constansts/strings.dart';
 import 'package:flutter_maps/Presentaion/Screens/login_screen.dart';
 import 'package:flutter_maps/Presentaion/Screens/otp_screen.dart';
 
 class AppRouter {
+  PhoneAuthCubit? phoneAuthCubit;
+  AppRouter() {
+    phoneAuthCubit = PhoneAuthCubit();
+  }
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case loginScreen:
-        return MaterialPageRoute(builder: (_) => const LoginScreen());
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<PhoneAuthCubit>.value(
+                  value: phoneAuthCubit!,
+                  child: const LoginScreen(),
+                ));
       case otpScreen:
-        return MaterialPageRoute(builder: (_) => const OTPScreen());
+        final phoneNumber = settings.arguments;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider<PhoneAuthCubit>.value(
+                  value: phoneAuthCubit!,
+                  child: OTPScreen(phoneNumber: phoneNumber),
+                ));
     }
   }
 }
