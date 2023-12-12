@@ -12,19 +12,21 @@ import 'package:flutter_maps/Presentaion/Widgets/show_indicator.dart';
 class LoginScreenBody extends StatelessWidget {
   LoginScreenBody({super.key});
   final GlobalKey<FormState> _PhoneFormKey = GlobalKey();
-  CustomTextFormField customTextFormField = CustomTextFormField();
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<PhoneAuthCubit, PhoneAuthState>(
+      listenWhen: (current, previous) {
+        return current != previous;
+      },
       listener: (context, state) {
         if (state is PhoneAuthLoading) {
           showProgressIndicator(context);
         } else if (state is PhoneAuthNumberSubmitted) {
           Navigator.pop(context);
-          //Not Sure
+          //getting the phone number from the state
           Navigator.of(context)
-              .pushNamed(otpScreen, arguments: customTextFormField.PhoneNumber);
+              .pushNamed(otpScreen, arguments: state.phoneNumber);
         } else if (state is PhoneAuthFailure) {
           Navigator.pop(context);
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -36,7 +38,7 @@ class LoginScreenBody extends StatelessWidget {
       child: Form(
           key: _PhoneFormKey,
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 88, horizontal: 24),
+            margin: const EdgeInsets.only(top: 88, right: 24, left: 24),
             child: Column(
               children: [
                 const IntroText(
@@ -44,9 +46,9 @@ class LoginScreenBody extends StatelessWidget {
                   subTitle:
                       "Please enter your phone number to verify your account",
                 ),
-                const SizedBox(height: 100),
-                const PhoneFormField(),
                 const SizedBox(height: 60),
+                const PhoneFormField(),
+                const SizedBox(height: 30),
                 CustomNextButton(
                   title: 'Next',
                   onPressed: () {
@@ -68,7 +70,7 @@ class LoginScreenBody extends StatelessWidget {
       Navigator.pop(context);
       _PhoneFormKey.currentState!.save();
       BlocProvider.of<PhoneAuthCubit>(context)
-          .submitPhoneNumber(customTextFormField.PhoneNumber!);
+          .submitPhoneNumber(BlocProvider.of<PhoneAuthCubit>(context).number);
     }
   }
 }

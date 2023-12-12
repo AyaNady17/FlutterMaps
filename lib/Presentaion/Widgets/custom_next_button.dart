@@ -3,7 +3,8 @@ import 'package:flutter_maps/Constansts/strings.dart';
 import 'package:flutter_maps/Constansts/text_styles.dart';
 
 class CustomNextButton extends StatelessWidget {
-  const CustomNextButton({super.key, required this.title, this.onPressed});
+  const CustomNextButton(
+      {super.key, required this.title, required this.onPressed});
   final String title;
   final void Function()? onPressed;
   @override

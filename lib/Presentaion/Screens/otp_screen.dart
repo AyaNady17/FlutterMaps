@@ -6,7 +6,7 @@ class OTPScreen extends StatelessWidget {
   final phoneNumber;
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Scaffold(
         body: OTPScreenBody(),
       ),

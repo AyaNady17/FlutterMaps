@@ -3,11 +3,12 @@ import 'package:flutter_maps/Constansts/my_colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PinCode extends StatelessWidget {
-  const PinCode({super.key});
-
+  const PinCode({super.key, required this.onCompleted});
+  final Function(String)? onCompleted;
   @override
   Widget build(BuildContext context) {
     return PinCodeTextField(
+      onCompleted: onCompleted,
       keyboardType: TextInputType.phone,
       cursorColor: Colors.black,
       appContext: context,

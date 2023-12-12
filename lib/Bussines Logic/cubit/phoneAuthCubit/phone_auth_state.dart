@@ -12,6 +12,9 @@ final class PhoneAuthFailure extends PhoneAuthState {
   PhoneAuthFailure(this.errMsg);
 }
 
-final class PhoneAuthNumberSubmitted extends PhoneAuthState {}
+final class PhoneAuthNumberSubmitted extends PhoneAuthState {
+  String phoneNumber;
+  PhoneAuthNumberSubmitted(this.phoneNumber);
+}
 
 final class PhoneAuthNumberOTPVerified extends PhoneAuthState {}

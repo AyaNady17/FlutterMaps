@@ -7,6 +7,7 @@ part 'phone_auth_state.dart';
 class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   PhoneAuthCubit() : super(PhoneAuthInitial());
   late String verificationId;
+  late String number;
   Future<void> submitPhoneNumber(String phoneNumber) async {
     emit(PhoneAuthLoading());
 
@@ -33,7 +34,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   void CodeSent(String verificationId, int? resendToken) {
     print("Code Sent");
     this.verificationId = verificationId;
-    emit(PhoneAuthNumberSubmitted());
+    emit(PhoneAuthNumberSubmitted(number));
   }
 
   Future<void> submitOTP(String otp) async {

@@ -10,19 +10,23 @@ class CountryLabelWidget extends StatelessWidget {
     return Expanded(
         flex: 1,
         child: Container(
+          height: 50,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
           decoration: BoxDecoration(
               border: Border.all(color: MyColors.lightGrey),
               borderRadius: const BorderRadius.all(Radius.circular(6))),
-          child: Text(
-            generateCountryFlage() + "  +20",
-            style: StylesManager.textStyle18,
+          child: Center(
+            child: Text(
+              "${generateCountryFlag()}  +20",
+              style: StylesManager.textStyle14
+                  .copyWith(color: Colors.black, fontWeight: FontWeight.w500),
+            ),
           ),
         ));
   }
 }
 
-String generateCountryFlage() {
+String generateCountryFlag() {
   String countryCode = 'eg';
   String flag = countryCode.toUpperCase().replaceAllMapped(RegExp(r'[A-Z]'),
       (match) => String.fromCharCode(match.group(0)!.codeUnitAt(0) + 127397));

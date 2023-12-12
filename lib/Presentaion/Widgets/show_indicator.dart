@@ -4,7 +4,7 @@ import 'package:lottie/lottie.dart';
 
 void showProgressIndicator(BuildContext context) {
   AlertDialog alertDialog = AlertDialog(
-    content: Center(child: Lottie.asset('loading.json')),
+    content: Center(child: Lottie.asset('assets/loading.json')),
     backgroundColor: Colors.transparent,
     elevation: 0,
   );
