@@ -17,7 +17,7 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   PhoneAuthCubit phoneAuthCubit = PhoneAuthCubit();
   static Position? position;
-  static final CameraPosition cameraPosition = CameraPosition(
+  static final CameraPosition myCurrentLocationCameraPosition = CameraPosition(
       target: LatLng(position!.latitude, position!.longitude), zoom: 17);
   final Completer<GoogleMapController> _controller = Completer();
 
@@ -30,7 +30,7 @@ class _MapScreenState extends State<MapScreen> {
 
   Widget buildMap() {
     return GoogleMap(
-      initialCameraPosition: cameraPosition,
+      initialCameraPosition: myCurrentLocationCameraPosition,
       mapType: MapType.normal,
       zoomControlsEnabled: false,
       myLocationButtonEnabled: false,
@@ -41,14 +41,41 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
+  Future<void> _goToMyCurrentLocation() async {
+    GoogleMapController controller = await _controller.future;
+    controller.animateCamera(
+        CameraUpdate.newCameraPosition(myCurrentLocationCameraPosition));
+  }
+
+  @override
+  void initState() {
+    getMyCurrentLocation();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        position != null
-            ? buildMap()
-            : const Center(child: CircularProgressIndicator()),
-      ],
+    return Scaffold(
+      body: Stack(
+        children: [
+          position != null
+              ? buildMap()
+              : const Center(child: CircularProgressIndicator()),
+        ],
+      ),
+      floatingActionButton: Container(
+        padding: const EdgeInsets.fromLTRB(0, 0, 8, 30),
+        child: FloatingActionButton(
+          onPressed: () {
+            _goToMyCurrentLocation();
+          },
+          backgroundColor: Colors.blue,
+          child: const Icon(
+            Icons.place,
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 }

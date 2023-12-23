@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_maps/Constansts/strings.dart';
+import 'package:flutter_maps/Presentaion/Screens/map_screen.dart';
 import 'package:flutter_maps/app_router.dart';
 import 'package:flutter_maps/firebase_options.dart';
 
@@ -22,7 +24,8 @@ class FlutterMaps extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Maps',
       theme: ThemeData(primarySwatch: Colors.blue),
-      onGenerateRoute: appRouter.generateRoute,
+      //  onGenerateRoute: appRouter.generateRoute,
+      home: MapScreen(),
     );
   }
 }
