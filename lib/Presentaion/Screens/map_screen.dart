@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_maps/Bussines%20Logic/cubit/phoneAuthCubit/phone_auth_cubit.dart';
 import 'package:flutter_maps/Helpers/location_helper.dart';
+import 'package:flutter_maps/Presentaion/Widgets/floating_search_bar.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -22,8 +23,7 @@ class _MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _controller = Completer();
 
   Future<void> getMyCurrentLocation() async {
-    await LocationHelper.determineCurrentLocation();
-    position = await Geolocator.getLastKnownPosition().whenComplete(() {
+    position = await LocationHelper.determineCurrentLocation().whenComplete(() {
       setState(() {});
     });
   }
@@ -34,7 +34,7 @@ class _MapScreenState extends State<MapScreen> {
       mapType: MapType.normal,
       zoomControlsEnabled: false,
       myLocationButtonEnabled: false,
-      myLocationEnabled: true,
+      myLocationEnabled: false,
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);
       }, //msh fahma el onmapcreated
@@ -45,6 +45,22 @@ class _MapScreenState extends State<MapScreen> {
     GoogleMapController controller = await _controller.future;
     controller.animateCamera(
         CameraUpdate.newCameraPosition(myCurrentLocationCameraPosition));
+  }
+
+  Widget _buildFloatingActionButton() {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(0, 0, 8, 30),
+      child: FloatingActionButton(
+        onPressed: () {
+          _goToMyCurrentLocation();
+        },
+        backgroundColor: Colors.blue,
+        child: const Icon(
+          Icons.place,
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 
   @override
@@ -61,21 +77,10 @@ class _MapScreenState extends State<MapScreen> {
           position != null
               ? buildMap()
               : const Center(child: CircularProgressIndicator()),
+          const customFloatingSearchBar(),
         ],
       ),
-      floatingActionButton: Container(
-        padding: const EdgeInsets.fromLTRB(0, 0, 8, 30),
-        child: FloatingActionButton(
-          onPressed: () {
-            _goToMyCurrentLocation();
-          },
-          backgroundColor: Colors.blue,
-          child: const Icon(
-            Icons.place,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      floatingActionButton: _buildFloatingActionButton(),
     );
   }
 }
