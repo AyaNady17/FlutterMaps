@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 
 class customFloatingSearchBar extends StatelessWidget {
   const customFloatingSearchBar({super.key});
@@ -9,7 +9,7 @@ class customFloatingSearchBar extends StatelessWidget {
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
     return FloatingSearchBar(
-      hint: 'Search...',
+      hint: 'Find a place...',
       scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
       transitionDuration: const Duration(milliseconds: 800),
       transitionCurve: Curves.easeInOut,
@@ -39,15 +39,10 @@ class customFloatingSearchBar extends StatelessWidget {
       builder: (context, transition) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Material(
+          child: const Material(
             color: Colors.white,
             elevation: 4.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: Colors.accents.map((color) {
-                return Container(height: 112, color: color);
-              }).toList(),
-            ),
+            child: Column(mainAxisSize: MainAxisSize.min, children: []),
           ),
         );
       },

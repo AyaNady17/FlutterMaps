@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_maps/Bussines%20Logic/cubit/phoneAuthCubit/phone_auth_cubit.dart';
 import 'package:flutter_maps/Helpers/location_helper.dart';
 import 'package:flutter_maps/Presentaion/Widgets/floating_search_bar.dart';
+import 'package:flutter_maps/Presentaion/Widgets/my_drawer.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -72,6 +73,7 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
       body: Stack(
         children: [
           position != null
