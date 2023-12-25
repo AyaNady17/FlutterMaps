@@ -24,6 +24,7 @@ class WebService {
         'key': apiKey,
         'sessiontoken': sessionToken,
       });
+      print(response.data);
       return response.data['predictions'];
     } catch (e) {
       print(e.toString());
