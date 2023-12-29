@@ -11,7 +11,7 @@ class PlaceItem extends StatelessWidget {
         .replaceAll(suggestion.description.split(',')[0], '');
     return Container(
       width: double.infinity,
-      margin: const EdgeInsetsDirectional.all(8),
+      margin: const EdgeInsetsDirectional.all(6),
       padding: const EdgeInsetsDirectional.all(4),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(8)),

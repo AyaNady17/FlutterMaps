@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_maps/Bussines%20Logic/cubit/Places%20Cubit/places_cubit.dart';
+import 'package:flutter_maps/Bussines%20Logic/cubit/Map%20Cubit/Map_cubit.dart';
 import 'package:flutter_maps/Bussines%20Logic/cubit/phoneAuthCubit/phone_auth_cubit.dart';
 import 'package:flutter_maps/Constansts/strings.dart';
 import 'package:flutter_maps/Data/repo/place_suggestion_repo.dart';
@@ -32,7 +32,7 @@ class AppRouter {
       case mapScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (context) => PlacesCubit(PlaceSuggestionsRepo()),
+                  create: (context) => MapCubit(MapsRepo()),
                   child: MapScreen(),
                 ));
     }
