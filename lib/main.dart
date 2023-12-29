@@ -24,7 +24,8 @@ class FlutterMaps extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Maps',
       theme: ThemeData(primarySwatch: Colors.blue),
-      onGenerateRoute: appRouter.generateRoute,
+      //  onGenerateRoute: appRouter.generateRoute,
+      home: MapScreen(),
     );
   }
 }

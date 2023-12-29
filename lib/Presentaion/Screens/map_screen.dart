@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_maps/Bussines%20Logic/cubit/Places%20Cubit/places_cubit.dart';
 import 'package:flutter_maps/Bussines%20Logic/cubit/phoneAuthCubit/phone_auth_cubit.dart';
+import 'package:flutter_maps/Data/repo/place_suggestion_repo.dart';
 import 'package:flutter_maps/Helpers/location_helper.dart';
 import 'package:flutter_maps/Presentaion/Widgets/floating_search_bar.dart';
 import 'package:flutter_maps/Presentaion/Widgets/my_drawer.dart';
@@ -79,7 +81,10 @@ class _MapScreenState extends State<MapScreen> {
           position != null
               ? buildMap()
               : const Center(child: CircularProgressIndicator()),
-          const customFloatingSearchBar(),
+          BlocProvider(
+            create: (context) => PlacesCubit(PlaceSuggestionsRepo()),
+            child: customFloatingSearchBar(),
+          ),
         ],
       ),
       floatingActionButton: _buildFloatingActionButton(),
