@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +26,8 @@ class _MapScreenState extends State<MapScreen> {
   static final CameraPosition myCurrentLocationCameraPosition = CameraPosition(
       target: LatLng(position!.latitude, position!.longitude), zoom: 17);
   final Completer<GoogleMapController> _controller = Completer();
+  // var markers = HashSet<Marker>();
+  // late PlaceModal selectedPlace;
 
   Future<void> getMyCurrentLocation() async {
     position = await LocationHelper.determineCurrentLocation().whenComplete(() {
@@ -41,6 +44,16 @@ class _MapScreenState extends State<MapScreen> {
       myLocationEnabled: false,
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);
+        // setState(() {
+        //   markers.add(
+        //     Marker(
+        //       markerId: const MarkerId('1'),
+        //       position: customFloatingSearchBar(
+        //         mapController: _controller,
+        //       ).goToSelectedPlace.target,
+        //     ),
+        //   );
+        // });
       }, //msh fahma el onmapcreated
     );
   }
@@ -82,12 +95,11 @@ class _MapScreenState extends State<MapScreen> {
           position != null
               ? buildMap()
               : const Center(child: CircularProgressIndicator()),
-          BlocProvider(
-            create: (context) => MapCubit(MapsRepo()),
-            child: customFloatingSearchBar(
-              mapController: _controller,
-            ),
-          ),
+          BlocProvider<MapCubit>(
+              create: (context) => MapCubit(MapsRepo()),
+              child: customFloatingSearchBar(
+                mapController: _controller,
+              )),
         ],
       ),
       floatingActionButton: _buildFloatingActionButton(),

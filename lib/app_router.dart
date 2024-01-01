@@ -31,7 +31,7 @@ class AppRouter {
 
       case mapScreen:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
+            builder: (_) => BlocProvider<MapCubit>(
                   create: (context) => MapCubit(MapsRepo()),
                   child: MapScreen(),
                 ));
