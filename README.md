@@ -21,7 +21,7 @@ Source code for Google maps app
 ![App Screenshot](https://github.com/AyaNady17/FlutterMaps/blob/main/assets/photo1.jpeg)
 
 ### Drawer Profile
-![App Screenshot](https://github.com/AyaNady17/FlutterMaps/blob/main/assets/photo1.jpeg)
+![App Screenshot](https://github.com/AyaNady17/FlutterMaps/blob/main/assets/photo2.jpeg)
 
 
 
