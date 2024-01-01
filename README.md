@@ -33,15 +33,6 @@ Source code for Google maps app
 - Show markers for source and destination locations.
 - Draw polyline for the closest path between source and destination.
 
-
-## Features
-
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
-
-
 ## API Reference
 
 #### Get place Suggestions
